@@ -1,4 +1,7 @@
 {
-  "username": "add your username here",
-  "cookie": "add your cookie here"
+  "username": "username",
+  "headers": {
+    "cookie": "cookie",
+    "x-ig-app-id": 123
+  }
 }

@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import config from './user.config.json';
 
-const REQUEST_HEADERS = {headers: {cookie: config.cookie}};
+const REQUEST_HEADERS = {headers: config.headers};
 
 const REQUEST = {
     followers: {
@@ -59,9 +59,9 @@ export const instagramRequests = (function () {
     }
 
     async function getUserId() {
-        let res = await fetch(`https://www.instagram.com/${config.username}/?__a=1`, REQUEST_HEADERS);
+        let res = await fetch(`https://i.instagram.com/api/v1/users/web_profile_info/?username=${config.username}`, REQUEST_HEADERS);
         res = await res.json();
-        return res.graphql.user.id;
+        return res.data.user.id;
     }
 
 
