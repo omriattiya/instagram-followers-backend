@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import config from './user.config.json';
+import {config} from "../config.js";
 
 const REQUEST_HEADERS = {headers: config.headers};
 
