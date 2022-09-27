@@ -34,7 +34,6 @@ export const instagramRequests = (function () {
         }
     }
 
-
     async function getAccounts(userId, request, count) {
         let followers = [];
         let hasReachLimit = false
@@ -68,5 +67,30 @@ export const instagramRequests = (function () {
         };
     }
 
+    async function getAccountsByQueryHash(userId, request) {
+        let followers = [];
+        let hasNext = true;
+        let after = null;
+        while (hasNext) {
+            await fetch(request.queryUrl + encodeURIComponent(JSON.stringify({
+                id: userId,
+                include_reel: true,
+                fetch_mutual: true,
+                first: 50,
+                after: after
+            })), REQUEST_HEADERS).then(res => res.json()).then(res => {
+                hasNext = res.data.user[request.key].page_info.has_next_page
+                after = res.data.user[request.key].page_info.end_cursor
+                followers = followers.concat(res.data.user[request.key].edges.map(({node}) => {
+                    return {
+                        username: node.username,
+                        fullName: node.full_name,
+                        profilePicUrl: node.profile_pic_url,
+                    }
+                }))
+            })
+        }
+        return followers;
+    }
 
 })();
