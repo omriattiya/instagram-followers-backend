@@ -18,4 +18,8 @@ app.get('/api/instagram', async function (req, res) {
     console.log('request end');
 });
 
+app.get('/api/instagram/env', async function (req, res) {
+    res.send(process.env);
+});
+
 app.listen(port, () => console.log(`app started on port ${port}`));
