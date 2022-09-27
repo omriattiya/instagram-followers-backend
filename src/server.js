@@ -17,4 +17,4 @@ app.get('/api/instagram', async function (req, res) {
     console.log('request end');
 });
 
-app.listen(80);
+app.listen(process.env.port || 8080);
